@@ -52,8 +52,6 @@ const App = (props) => {
     <div>
       <Header title='Anecdote of the day' />
       <p>{props.anecdotes[selected]}</p>
-      <p>selected = {selected}</p>
-      <p>rand= {randomNumber}</p>
       <Button handleClick={handleVotes} text='Vote' />
       <Button handleClick={handleSelected} text='Next Anecdote' />
       <Section title='Anecdote with most votes' />
