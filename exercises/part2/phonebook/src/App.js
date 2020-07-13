@@ -32,11 +32,14 @@ const App = () => {
     const nameObject = { name: newName, number: newNumber }
     const contains = persons.find(nameOb => nameOb.name === newName)
     if (contains) { window.alert(`${newName} is already added to phonebook`) } else {
-      if (newName !== '' && newNumber !== '') {
+      if (newName === '' || newNumber === '') {
+        window.alert('You have not entered the name or the number. Please fill both boxes.')
+      }else{
         setPersons(persons.concat(nameObject))
         setNewName('')
         setNewNumber('')
       }
+      
     }
   }
   return (
