@@ -18,7 +18,6 @@ const App = () => {
   }, [])
   console.log('render', notes.length, 'notes')
 
-
   const addNote = (event) => {
     event.preventDefault()
     const noteObject = {
@@ -45,22 +44,23 @@ const App = () => {
       <h1>Notes</h1>
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all' }
+          show {showAll ? 'important' : 'all'}
         </button>
-      </div>  
+      </div>
       <ul>
-        {notesToShow.map(note => 
+        {notesToShow.map(note =>
           <Note key={note.id} note={note} />
         )}
       </ul>
       <form onSubmit={addNote}>
-        <input value={newNote} 
+        <input
+          value={newNote}
           onChange={handleNoteChange}
         />
-        <button type="submit">save</button>
-      </form> 
+        <button type='submit'>save</button>
+      </form>
     </div>
   )
 }
 
-export default App 
+export default App
