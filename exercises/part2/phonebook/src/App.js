@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Form from './components/Form'
 import Filter from './components/Filter'
@@ -49,7 +49,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter value={filter} onValueChange={handleFilterChange} />
       <h2>Add new number</h2>
-      <Form handleAddP={handleAddPerson} newNm={newName} handleNmChange={handleNameChange} newNumb={newNumber} handleNumbChange={handleNumberChange}/>
+      <Form handleAddP={handleAddPerson} newNm={newName} handleNmChange={handleNameChange} newNumb={newNumber} handleNumbChange={handleNumberChange} />
       <h2>Numbers</h2>
       <Persons contacts={persons} filterText={filter} />
     </div>
