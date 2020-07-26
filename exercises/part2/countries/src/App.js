@@ -21,15 +21,11 @@ function App () {
       })
   }, [])
   console.log('Got', countriesList.length, 'Countries')
-  console.log('Countries', countriesList )
-
   return (
     <div>
       <h1>Find countries info here</h1>
       <Search countryNm={countryName} handleCountryNmChange={handleCountryNameChange} />
-      <SearchResults countriesLst={countriesList} filterText={countryName} />
-    </div>
-  )
+      <SearchResults contriesLst={countriesList} filterText={countryName} />
+    </div>)
 }
-
 export default App
