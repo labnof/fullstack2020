@@ -32,20 +32,20 @@ const CountryDetails = ({country}) =>{
 
 const SearchResults = (props) => {
   const list = props.contriesLst
-  let filterList = list.filter(country => country.name.toLowerCase().includes(props.filterText.toLowerCase()))
+  const filterList = list.filter(country => country.name.toLowerCase().includes(props.filterText.toLowerCase()))
   if (props.filterText === '') {
     return null
   } else if (filterList.length > 10) {
     return <p> Too many matches, specify another filter. </p>
-  }
-
-  if (filterList.length > 1 && filterList.length < 11) {
+  } else if (filterList.length === 1) {
+    const country = filterList[0]
+    return (<CountryDetails country={country} />)
+  } else {
     return (
       <ul>
         {filterList.map((filteredCountry, i) => {
           const handleButtonClick = () => {
             console.log('botton clicked ', filteredCountry.name)
-            filterList = filteredCountry
           }
           return (
             <div key={i}>
@@ -55,10 +55,6 @@ const SearchResults = (props) => {
         }
         )}
       </ul>)
-  } else if (filterList.length === 1) {
-    const country = filterList[0]
-    return (<CountryDetails country={country} />)
   }
 }
-
 export default SearchResults
