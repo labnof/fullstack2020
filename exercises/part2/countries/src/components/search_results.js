@@ -21,7 +21,7 @@ const Details = ({ country }) => {
   )
 }
 
-const CountryDetails = ({country}) =>{
+const CountryDetails = ({ country }) => {
   return (
     <div>
       <Details country={country} />
@@ -33,19 +33,16 @@ const CountryDetails = ({country}) =>{
 const SearchResults = (props) => {
   const list = props.contriesLst
   const filterList = list.filter(country => country.name.toLowerCase().includes(props.filterText.toLowerCase()))
-  if (props.filterText === '') {
-    return null
-  } else if (filterList.length > 10) {
-    return <p> Too many matches, specify another filter. </p>
-  } else if (filterList.length === 1) {
-    const country = filterList[0]
-    return (<CountryDetails country={country} />)
-  } else {
-    return (
+  const text = props.filterText
+  return (<div> {text === '' && <p> Please enter country. </p>}
+    <div>{filterList.length > 10 && text !== '' && <p> Too many matches, specify another filter. </p>}</div>
+    <div>{filterList.length === 1 && <CountryDetails country={filterList[0]} />}</div>
+    <div>{(filterList.length > 1 && filterList.length < 11) &&
       <ul>
         {filterList.map((filteredCountry, i) => {
           const handleButtonClick = () => {
             console.log('botton clicked ', filteredCountry.name)
+            return (<CountryDetails country={filteredCountry} />)
           }
           return (
             <div key={i}>
@@ -54,7 +51,7 @@ const SearchResults = (props) => {
             </div>)
         }
         )}
-      </ul>)
-  }
+      </ul>}
+    </div></div>)
 }
 export default SearchResults
