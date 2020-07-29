@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Weather from './county_weather'
 
 const Languages = (props) => {
   return (
@@ -27,6 +28,7 @@ const CountryDetails = ({ country }) => {
       <Details country={country} />
       <Languages languages={country.languages} />
       <img src={country.flag} alt='Flag' width='160' height='100' />
+      <Weather capital={country.capital} />
     </div>)
 }
 
@@ -56,7 +58,7 @@ const SearchResults = (props) => {
           {countryList}
         </ul>}
       </div>
-      <div>{text !== '' && filteredCountry.name && <CountryDetails country={filteredCountry} />}</div>
+      <div>{!(filterList.length === 1) && !(filterList.length > 10) && text !== '' && filteredCountry.name && <CountryDetails country={filteredCountry} />}</div>
     </div>)
 }
 export default SearchResults
