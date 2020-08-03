@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Form from './components/Form'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
+import phonebook from './services'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   useEffect(() => {
     console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
+    phonebook
+      .getAll()
+      .then(initialPhonebook => {
         console.log('promise fulfilled')
-        setPersons(response.data)
+        setPersons(initialPhonebook)
       })
   }, [])
   console.log('render', persons.length, 'persons')
