@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Form from './components/Form'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 import phonebook from './services/phonebook'
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
   }, [])
   console.log('sent', persons.length, 'persons for rendring')
 
+  const [errorMessage, setErrorMessage] = useState(null)
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
@@ -76,6 +78,7 @@ const App = () => {
   }
   return (
     <div>
+      <Notification message={errorMessage} />
       <h2>Phonebook</h2>
       <Filter value={filter} onValueChange={handleFilterChange} />
       <h2>Add new number</h2>
