@@ -25,8 +25,8 @@ const Persons = (props) => {
           setPersons(persons.filter(n => n.id !== deletedPerson.id))
           window.alert(`${deletedPerson.name}' has been deleted.`)
         }).catch(_error => {
-          window.alert(`${deletedPerson.name}' was already deleted from server.`)
           setPersons(persons.filter(n => n.id !== deletedPerson.id))
+          window.alert(`${deletedPerson.name}' was already deleted from server.`)
         })
     }
   }

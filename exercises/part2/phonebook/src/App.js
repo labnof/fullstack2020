@@ -35,18 +35,33 @@ const App = () => {
   const handleAddPerson = (event) => {
     event.preventDefault()
     const nameObject = { name: newName, number: newNumber }
-    const contains = persons.find(nameOb => nameOb.name === newName)
-    if (contains) { window.alert(`${newName} is already added to phonebook.`) } else {
-      if (newName !== '' && newNumber !== '') {
+    const contains = persons.find(nameOb =>
+      nameOb.name === newName &&
+      nameOb.number === newNumber)
+    const hasDiffNum = persons.find(nameOb =>
+      nameOb.name === newName &&
+      nameOb.number !== newNumber)
+    if (contains) { window.alert(`${newName} is already added to phonebook.`) } else if (hasDiffNum) {
+      if (window.confirm(
+      `${newName} is already in phonebook, do you want to replace the old number with the new number?`)) {
         phonebook
-          .create(nameObject)
-          .then(returnedNote => {
-            setPersons(persons.concat(returnedNote))
+          .update(hasDiffNum.id, nameObject)
+          .then(returnedUpdatedPerson => {
+            setPersons(persons.map(person => person.id !==
+              hasDiffNum.id ? person : returnedUpdatedPerson))
             setNewName('')
             setNewNumber('')
           })
-      } else { window.alert('You have not entered the name or the number.') }
-    }
+      }
+    } else if (newName !== '' && newNumber !== '') {
+      phonebook
+        .create(nameObject)
+        .then(returnedNote => {
+          setPersons(persons.concat(returnedNote))
+          setNewName('')
+          setNewNumber('')
+        })
+    } else { window.alert('You have not entered the name or the number.') }
   }
   return (
     <div>
