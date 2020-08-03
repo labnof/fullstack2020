@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Form from './components/Form'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
-import phonebook from './services'
+import phonebook from './services/phonebook'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -15,7 +15,7 @@ const App = () => {
         setPersons(initialPhonebook)
       })
   }, [])
-  console.log('render', persons.length, 'persons')
+  console.log('sent', persons.length, 'persons for rendring')
 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
@@ -38,9 +38,13 @@ const App = () => {
     const contains = persons.find(nameOb => nameOb.name === newName)
     if (contains) { window.alert(`${newName} is already added to phonebook.`) } else {
       if (newName !== '' && newNumber !== '') {
-        setPersons(persons.concat(nameObject))
-        setNewName('')
-        setNewNumber('')
+        phonebook
+          .create(nameObject)
+          .then(returnedNote => {
+            setPersons(persons.concat(returnedNote))
+            setNewName('')
+            setNewNumber('')
+          })
       } else { window.alert('You have not entered the name or the number.') }
     }
   }
