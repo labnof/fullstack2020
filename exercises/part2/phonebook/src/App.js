@@ -47,19 +47,30 @@ const App = () => {
         phonebook
           .update(hasDiffNum.id, nameObject)
           .then(returnedUpdatedPerson => {
-            setPersons(persons.map(person => person.id !==
-              hasDiffNum.id ? person : returnedUpdatedPerson))
             setNewName('')
             setNewNumber('')
+          })
+
+        phonebook
+          .getAll()
+          .then(initialPhonebook => {
+            console.log('promise fulfilled')
+            setPersons(initialPhonebook)
           })
       }
     } else if (newName !== '' && newNumber !== '') {
       phonebook
         .create(nameObject)
-        .then(returnedNote => {
-          setPersons(persons.concat(returnedNote))
+        .then(initialPhonebook => {
+          console.log('promise fulfilled')
           setNewName('')
           setNewNumber('')
+        })
+      phonebook
+        .getAll()
+        .then(initialPhonebook => {
+          console.log('promise fulfilled')
+          setPersons(initialPhonebook)
         })
     } else { window.alert('You have not entered the name or the number.') }
   }
