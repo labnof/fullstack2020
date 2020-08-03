@@ -53,24 +53,24 @@ const App = () => {
 
         phonebook
           .getAll()
-          .then(initialPhonebook => {
+          .then(currentPhonebook => {
             console.log('promise fulfilled')
-            setPersons(initialPhonebook)
+            setPersons(currentPhonebook)
           })
       }
     } else if (newName !== '' && newNumber !== '') {
       phonebook
         .create(nameObject)
-        .then(initialPhonebook => {
+        .then(returnPerson => {
           console.log('promise fulfilled')
           setNewName('')
           setNewNumber('')
         })
       phonebook
         .getAll()
-        .then(initialPhonebook => {
+        .then(currentPhonebook => {
           console.log('promise fulfilled')
-          setPersons(initialPhonebook)
+          setPersons(currentPhonebook)
         })
     } else { window.alert('You have not entered the name or the number.') }
   }
