@@ -18,7 +18,8 @@ const App = () => {
   }, [])
   console.log('sent', persons.length, 'persons for rendring')
 
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [message, setMessage] = useState(null)
+  const [messageStyle, setMessagestyle] = useState('')
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
@@ -34,6 +35,7 @@ const App = () => {
     console.log(event.target.value)
     setFilter(event.target.value)
   }
+
   const handleAddPerson = (event) => {
     event.preventDefault()
     const nameObject = { name: newName, number: newNumber }
@@ -51,6 +53,8 @@ const App = () => {
           .then(returnedUpdatedPerson => {
             setNewName('')
             setNewNumber('')
+            setMessage(`${nameObject.name} has been updated`)
+            setMessagestyle('add')
           })
 
         phonebook
@@ -67,6 +71,13 @@ const App = () => {
           console.log('promise fulfilled')
           setNewName('')
           setNewNumber('')
+          setMessage(`Added ${nameObject.name}`)
+          setMessagestyle('add')
+
+          setTimeout(() => {
+            setMessage(null)
+            setMessagestyle(null)
+          }, 5000)
         })
       phonebook
         .getAll()
@@ -78,7 +89,7 @@ const App = () => {
   }
   return (
     <div>
-      <Notification message={errorMessage} />
+      <Notification message={message} style={messageStyle} />
       <h2>Phonebook</h2>
       <Filter value={filter} onValueChange={handleFilterChange} />
       <h2>Add new number</h2>
