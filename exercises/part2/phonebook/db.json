@@ -1,99 +1,19 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
       "id": 2
     },
     {
-      "name": "as",
-      "number": "1",
+      "name": "Dan Abramov",
+      "number": "",
+      "id": 3
+    },
+    {
+      "name": "fola jolaroni",
+      "number": "2345678998765",
       "id": 4
-    },
-    {
-      "name": "q",
-      "number": "23434",
-      "id": 5
-    },
-    {
-      "name": "Akintola rolaanen",
-      "number": "13456780786",
-      "id": 6
-    },
-    {
-      "name": "a",
-      "number": "2",
-      "id": 7
-    },
-    {
-      "name": "12e",
-      "number": "234",
-      "id": 8
-    },
-    {
-      "name": "qwer1",
-      "number": "56",
-      "id": 9
-    },
-    {
-      "name": "rty",
-      "number": "1",
-      "id": 10
-    },
-    {
-      "name": "+pof",
-      "number": "1234",
-      "id": 11
-    },
-    {
-      "name": "olajumobi Adekola",
-      "number": "12328765",
-      "id": 12
-    },
-    {
-      "name": "frgethjuy",
-      "number": "435698t765",
-      "id": 13
-    },
-    {
-      "name": "saas",
-      "number": "21412",
-      "id": 14
-    },
-    {
-      "name": "we",
-      "number": "15434547",
-      "id": 15
-    },
-    {
-      "name": "aw",
-      "number": "43465768798",
-      "id": 16
-    },
-    {
-      "name": "yuio",
-      "number": "1234",
-      "id": 17
-    },
-    {
-      "name": "gfdfsfgs",
-      "number": "55435464",
-      "id": 18
-    },
-    {
-      "name": "wfrg",
-      "number": "32",
-      "id": 21
-    },
-    {
-      "name": "2gfdd",
-      "number": "1",
-      "id": 22
     }
   ]
 }

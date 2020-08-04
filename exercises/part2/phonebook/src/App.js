@@ -44,7 +44,8 @@ const App = () => {
       nameOb.number === newNumber)
     const hasDiffNum = persons.find(nameOb =>
       nameOb.name === newName &&
-      nameOb.number !== newNumber)
+      nameOb.number !== newNumber &&
+      newNumber !== '')
     if (contains) { window.alert(`${newName} is already added to phonebook.`) } else if (hasDiffNum) {
       if (window.confirm(
       `${newName} is already in phonebook, do you want to replace the old number with the new number?`)) {
@@ -55,15 +56,26 @@ const App = () => {
             setNewNumber('')
             setMessage(`${nameObject.name} has been updated`)
             setMessagestyle('add')
+            setTimeout(() => { setMessage(null) }, 5000)
+            phonebook
+              .getAll()
+              .then(currentPhonebook => {
+                console.log('promise fulfilled')
+                setPersons(currentPhonebook)
+              })
+          }).catch(_error => {
+            setMessage(`${nameObject.name} is no longer in the Phonebook.`)
+            setTimeout(() => { setMessage(null) }, 5000)
+            setNewName('')
+            setNewNumber('')
+            phonebook
+              .getAll()
+              .then(currentPhonebook => {
+                console.log('promise fulfilled')
+                setPersons(currentPhonebook)
+              })
           })
-
-        phonebook
-          .getAll()
-          .then(currentPhonebook => {
-            console.log('promise fulfilled')
-            setPersons(currentPhonebook)
-          })
-      }
+      } else { window.alert('Please enter new number.') }
     } else if (newName !== '' && newNumber !== '') {
       phonebook
         .create(nameObject)
@@ -73,24 +85,20 @@ const App = () => {
           setNewNumber('')
           setMessage(`Added ${nameObject.name}`)
           setMessagestyle('add')
-
-          setTimeout(() => {
-            setMessage(null)
-            setMessagestyle(null)
-          }, 5000)
-        })
-      phonebook
-        .getAll()
-        .then(currentPhonebook => {
-          console.log('promise fulfilled')
-          setPersons(currentPhonebook)
+          setTimeout(() => { setMessage(null) }, 5000)
+          phonebook
+            .getAll()
+            .then(currentPhonebook => {
+              console.log('promise fulfilled')
+              setPersons(currentPhonebook)
+            })
         })
     } else { window.alert('You have not entered the name or the number.') }
   }
   return (
     <div>
-      <Notification message={message} style={messageStyle} />
       <h2>Phonebook</h2>
+      <Notification message={message} style={messageStyle} />
       <Filter value={filter} onValueChange={handleFilterChange} />
       <h2>Add new number</h2>
       <Form handleAddP={handleAddPerson} newNm={newName} handleNmChange={handleNameChange} newNumb={newNumber} handleNumbChange={handleNumberChange} />

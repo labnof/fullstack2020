@@ -2,6 +2,8 @@ import React from 'react'
 
 const Notification = ({ message, style }) => {
   const errorStyle = {
+    position: 'absolute',
+    top: 0,
     color: 'red',
     background: 'lightgrey',
     fontSize: 20,

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import phonebook from '../services/phonebook'
+import Notification from './Notification'
 
 const Persons = (props) => {
+  const [message, setMessage] = useState(null)
+  const messageStyle = {}
+  // const [messageStyle, setMessagestyle] = useState('')
   const [persons, setPersons] = useState([])
   const [filteredPersons, setfiltedPersons] = useState([])
   useEffect(() => {
@@ -23,21 +27,27 @@ const Persons = (props) => {
         .then(returnedPersons => {
           console.log('returnedPersons', returnedPersons)
           setPersons(persons.filter(n => n.id !== deletedPerson.id))
-          window.alert(`${deletedPerson.name}' has been deleted.`)
+          setMessage(`${deletedPerson.name} has been deleted.`)
+          setTimeout(() => { setMessage(null) }, 5000)
         }).catch(_error => {
           setPersons(persons.filter(n => n.id !== deletedPerson.id))
-          window.alert(`${deletedPerson.name}' was already deleted from server.`)
+          setMessage(`${deletedPerson.name} was already deleted from server.`)
+          setTimeout(() => { setMessage(null) }, 5000)
         })
     }
   }
+
   return (
-    <ul>
-      {filteredPersons
-        .map((filteredPerson, i) =>
-          <li key={i}> {filteredPerson.name} {filteredPerson.number}
-            <button onClick={() => handleDelete(filteredPerson)}> Delete </button>
-          </li>)}
-    </ul>
+    <div>
+      <Notification message={message} style={messageStyle} />
+      <ul>
+        {filteredPersons
+          .map((filteredPerson, i) =>
+            <li key={i}> {filteredPerson.name} {filteredPerson.number}
+              <button onClick={() => handleDelete(filteredPerson)}> Delete </button>
+            </li>)}
+      </ul>
+    </div>
   )
 }
 export default Persons
