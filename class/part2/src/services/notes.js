@@ -1,5 +1,7 @@
 import axios from 'axios'
-const baseUrl = 'https://guarded-waters-89899.herokuapp.com/api/notes' // local server: 'http://localhost:3001/notes'
+const baseUrl = '/api/notes' // relative path
+// online sever:'https://guarded-waters-89899.herokuapp.com/api/notes'
+// local server: 'http://localhost:3001/notes'
 
 const getAll = async () => {
   const request = axios.get(baseUrl)
