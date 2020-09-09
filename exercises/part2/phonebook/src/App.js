@@ -79,7 +79,7 @@ const App = () => {
     } else if (newName !== '' && newNumber !== '') {
       phonebook
         .create(nameObject)
-        .then(returnPerson => {
+        .then(createdPerson => {
           console.log('promise fulfilled')
           setNewName('')
           setNewNumber('')
@@ -92,6 +92,10 @@ const App = () => {
               console.log('promise fulfilled')
               setPersons(currentPhonebook)
             })
+        })
+        .catch(_error => {
+          setMessage(_error.response.data.error)
+          setTimeout(() => { setMessage(null) }, 5000)
         })
     } else { window.alert('You have not entered the name or the number.') }
   }
